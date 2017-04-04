@@ -23,11 +23,13 @@ Plugin 'majutsushi/tagbar'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+
+"Plugin 'git://git.wincent.com/command-t.git'
+
 " git repos on your local machine (i.e. when working on your own plugin)
 "
 " Plugin 'file:///home/gmarik/path/to/plugin'
-Plugin 'file:///home/shugui/.vim/bundle/taglist'
+"Plugin 'file:///home/shugui/.vim/bundle/taglist'
 "
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
