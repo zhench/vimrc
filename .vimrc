@@ -23,13 +23,11 @@ Plugin 'majutsushi/tagbar'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
-
 "Plugin 'git://git.wincent.com/command-t.git'
-
 " git repos on your local machine (i.e. when working on your own plugin)
 "
 " Plugin 'file:///home/gmarik/path/to/plugin'
-"Plugin 'file:///home/shugui/.vim/bundle/taglist'
+Plugin 'file:///home/shugui/.vim/bundle/taglist'
 "
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
@@ -61,6 +59,37 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
+
+set t_Co=256  
+set laststatus=2  
+set lazyredraw  
+let g:airline_theme='powerlineish'  
+" 使用powerline打过补丁的字体  
+let g:airline_powerline_fonts=1  
+if !exists('g:airline_symbols')  
+    let g:airline_symbols={}  
+endif  
+    " 关闭空白符检测  
+let g:airline#extensions#whitespace#enabled=0  
+
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
 
 """"""plugin seting end"""""""""""""""""""""""""""
 
