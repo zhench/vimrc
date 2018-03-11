@@ -1,3 +1,8 @@
+syntax enable
+set background=dark
+colorscheme slate
+set nu
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -6,29 +11,59 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
-"
+
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+" git interface
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Raimondi/delimitMate'
-Plugin 'scrooloose/syntastic'
-Plugin 'majutsushi/tagbar'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+" filesystem
+Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-scripts/winmanager'
+" html 
+" isnowfy on compatible with python not python3
+Plugin 'isnowfy/python-vim-instant-markdown'
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'nelstrom/vim-markdown-preview'
+
+"python sytax checker
+Plugin 'nvie/vim-flake8'
+Plugin 'vim-scripts/Pydiction'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-syntastic/syntastic'
+"Plugin 'Lokaltog/vim-powerline'
+Plugin 'Yggdroot/indentLine'
+
+" auto-completion-stuff
+"Plugin 'klen/python-mode'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'klen/rope-vim'
+"Plugin 'davidhalter/jedi-vim'
+Plugin 'ervandew/supertab'
+
+" code folding
+Plugin 'tmhedberg/SimpylFold'
+
+" Colors!!!
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'jnurmine/Zenburn'
+
+Plugin 'vim-scripts/taglist.vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-"
 " Plugin 'file:///home/gmarik/path/to/plugin'
-Plugin 'file:///home/shugui/.vim/bundle/taglist'
-"
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -39,71 +74,89 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+let g:SimpylFold_docstring_preview=1
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
+"autocomplete
+let g:ycm_autoclose_preview_window_after_complation=1
 "
+"custom keys
+let mapleader=" "
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"
+call togglebg#map("<F5>")
+
+let NERDTreeIgnore=['\.pyc$','\~$']  "ignore files in nerdtree
+
+" I don't like swap files
+set noswapfile
+
+
+
 " Brief help
 " :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-""""""plugin seting"""""""""""""""""""""""""""""""
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_auto_jump = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_powerline_fonts = 1
+"--------------NERDTree Config--------------"
+nmap <F2> :NERDTreeMirror<CR>
+nmap <F2> :NERDTreeToggle<CR>
+let NERDTreeDirArrows=0
+"--------------end--------------------------"
 
-set t_Co=256  
-set laststatus=2  
-set lazyredraw  
-let g:airline_theme='powerlineish'  
-" 使用powerline打过补丁的字体  
-let g:airline_powerline_fonts=1  
-if !exists('g:airline_symbols')  
-    let g:airline_symbols={}  
-endif  
-    " 关闭空白符检测  
-let g:airline#extensions#whitespace#enabled=0  
+"--------------split navigations------------"
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.maxlinenr = '☰'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
+"--------------Enable folding---------------"
+set foldmethod=indent
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
 
-""""""plugin seting end"""""""""""""""""""""""""""
+" YouCompleteMe
+let g:ycm_server_python_interpreter='python'
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 
-
-""""""vim setting"""""""""""""""""""""""""""""""""
-set number
+"--------------Python-----------------------"
+syntax on
+set autoindent
+set mouse=a
+set backspace=2
+set smartindent
+set tabstop=4
+set softtabstop=4
+set expandtab
+set ruler
+set cmdheight=1
+"set shortmess=atI
+"set list
+"set listchars=tab:>-,trail:-
 set laststatus=2
-"colo evening
-set nobackup
+"set paste
+au BufNewFile,BufRead *.py set nonumber
 
-""""""vim setting end"""""""""""""""""""""""""""""
+"----------------ctags----------------------"
+set tags=tags
+map <F9> :TlistToggle<CR>
+let Tlist_Use_Right_Window=1
+let Tlist_WinWidth=25
+set autochdir
 
-""""""Keymap""""""""""""""""""""""""""""""""""""""
-nmap <F9> :TagbarToggle<CR>
-map <C-\> <ESC>:q<CR>
-map <C-e> :NERDTree<CR>
-""""""Keymap end""""""""""""""""""""""""""""""""""
+"---------------winmanager------------------"
+let g:winManagerWindowLayout="NERDTree|TagList"
+let g:winManagerWidth=30
+nmap <silent> <F8> :WMToggle<cr>
+let g:AutoOpenWinManager=1
+"let Tlist_Exit_OnlyWindow=1
+let g:persistentBehaviour=0 "ru guo suo you bian ji wenjian dou guan bi le ,tuchu vim"
+
+"--------------airline----------------------"
+
